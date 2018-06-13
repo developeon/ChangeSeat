@@ -18,7 +18,7 @@
 	}
         .desk01 {
             margin: 10px;
-            border: 2px solid rgba(0, 0, 0, 0.25);
+            border: 2px solid #d28b20;
             width: 80px;
             background: #d28b20;
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
@@ -99,7 +99,6 @@
 		
 	%>
 	
-	 
     
 	<div id="panel">
 		<div id="start-board">
@@ -122,8 +121,8 @@
 	    	 cnt++;
 	    	 if(tmpIndex < (division*2)){
 	    		 %>
-	    		 <div class='desk01' id = "<%=i%>" onclick ="seatClick(<%=i%>)"><div class='desk02'><span id="span<%=i%>"><%if(numbers.get(i) == 0) out.println("X"); else out.println(numbers.get(i)); %></span></div></div>
-	    	     <div class='desk01' id = "<%=i+1%>" onclick ="seatClick(<%=i+1%>)"><div class='desk02'><span id="span<%=i+1%>"><%if(numbers.get(i+1) == 0) out.println("X"); else out.println(numbers.get(i+1)); %></span></div></div>
+	    		 <div class='desk01' id = "<%=i%>" onclick ="seatClick(<%=i%>)"><div class='desk02'><span id="span<%=i%>"><%if(numbers.get(i) == 0) out.println("X"); else out.println(numbers.get(i)+"번"); %></span></div></div>
+	    	     <div class='desk01' id = "<%=i+1%>" onclick ="seatClick(<%=i+1%>)"><div class='desk02'><span id="span<%=i+1%>"><%if(numbers.get(i+1) == 0) out.println("X"); else out.println(numbers.get(i+1)+"번"); %></span></div></div>
 	    	     <div class='tmp'></div>
 	    		 <%
 	    	 }
@@ -144,6 +143,12 @@
 	     
 	   %>
        </div>
+       <form name = "forSave" method="post" action = "saveResult.jsp">
+         <input type = "hidden" name = "result" value = "<% out.println(Arrays.toString(numbers.toArray()).replace("[","").replace("]","").trim()); %>">
+         <input type = "hidden" name = "resultNum" value = "<%=num%>">
+         <input type = "hidden" name = "resultDivision" value = "<%=division%>">
+        <input type = "submit" value = "save">
+       </form>
        <script>
        var cnt = 0;
        var tmpIdx1;
@@ -160,14 +165,31 @@
         	 var idx = document.getElementById(idx);
         	 idx.style.border = '2px solid red';
         	 if(cnt==2){
-        		 cnt=0;
+        		 setTimeout(function(){  
+        			 cnt=0;
         		 var tmpText = document.getElementById("span"+tmpIdx1).innerHTML;
         		 document.getElementById("span"+tmpIdx1).innerHTML = document.getElementById("span"+tmpIdx2).innerHTML;
         		 document.getElementById("span"+tmpIdx2).innerHTML = tmpText;
-        		 document.getElementById(tmpIdx1).style.border = '2px solid rgba(0, 0, 0, 0.25)';
-        		 document.getElementById(tmpIdx2).style.border = '2px solid rgba(0, 0, 0, 0.25)';
+        		 document.getElementById(tmpIdx1).style.border = '2px solid #d28b20';
+        		 document.getElementById(tmpIdx2).style.border = '2px solid #d28b20'; }, 300);
+        		 ChangeResultValue(tmpIdx1,tmpIdx2);
+        		 
         	 }
+        
          }
+        function ChangeResultValue(tmpIdx1,tmpIdx2){
+        	
+        	var str = forSave.result.value;
+            var res = str.split(",");
+        	
+        	var tmp = res[tmpIdx1];
+        	res[tmpIdx1] = res[tmpIdx2];
+        	res[tmpIdx2] = tmp;
+ 
+        	forSave.result.value = res.toString();
+        	
+        }
+        
        </script>
     
 
