@@ -8,7 +8,50 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자리 바꾸기 알고리즘</title>
+<title>자리 바꾸기</title>
+<link rel="stylesheet" href="css/blackboard.css">
+<link rel="stylesheet" type="text/css"
+	href="//fonts.googleapis.com/css?family=Architects Daughter" />
+     <style>
+	body{
+	min-width:1220px;
+	}
+        .desk01 {
+            margin: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.25);
+            width: 80px;
+            background: #d28b20;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 3px;
+            display: inline-block;
+        }
+        
+        .desk01 .desk02 {
+            height: 40px;
+            margin: 10px;
+            width: 75%;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 2px;
+            text-align: center;
+            display: inline-block;
+        }
+        
+        .desk02 span {
+            line-height: 40px;
+            color: white;
+        }
+        
+        .tmp {
+            width: 30px;
+            display: inline-block;
+        }
+        
+        .container {
+            text-align: center;
+            width: 80%;
+            margin: 30px auto;
+        }
+    </style>
 </head>
 <body>
 	<%
@@ -47,9 +90,37 @@
 			
 		}
 		
-		for(int iter:numbers){
-			System.out.println(iter);
-		}
+		if(numbers.size()%2 == 1){
+			numbers.add(0);
+		} 
+		
 	%>
+	
+	 
+    
+	<div id="panel">
+		<div id="start-board">
+			<div id="how-play" class="questions">Blackboard</div>
+		</div>
+	</div>
+	
+	   <div class="container">
+	   <%
+	   int cnt = 0;
+	     for(int i = 0; i < numbers.size(); i+=2){
+	    	 cnt++;
+	    	 %>
+	    	 <div class='desk01'><div class='desk02'><span><%=numbers.get(i)%>번</span></div></div>
+	    	 <div class='desk01'><div class='desk02'><span><%=numbers.get(i+1)%>번</span></div></div>
+	    	 <div class='tmp'></div>
+	    	 <% 
+	    	 if(cnt%division == 0){
+	    		 out.println("<br>");
+	    	 }
+	    	
+	     }
+	   %>
+       </div>
+
 </body>
 </html>
