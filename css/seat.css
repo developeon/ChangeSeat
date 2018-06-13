@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.seat {
+    float:left;
+    display: block;
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: 2px solid #ddd;
+    color: white;
+    line-height: 30px;
+}
+
+.seat-select {
+    display: none;
+}
+
+
+.seat-select:checked+.seat {
+    background: #48A684;
+}
