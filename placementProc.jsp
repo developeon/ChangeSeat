@@ -109,21 +109,39 @@
 	
 	   <div class="container">
 	   <%
+	    int tmpIndex = 41;
+	     for(int i = 0; i < division *2; i++){
+	    	 if(numbers.get(i) == 0) {
+	    		 tmpIndex = i;
+	    		 break;
+	    	 }
+	     }
+	     
 	   int cnt = 0;
 	     for(int i = 0; i < numbers.size(); i+=2){
 	    	 cnt++;
-	    	 
+	    	 if(tmpIndex < (division*2)){
+	    		 %>
+	    		 <div class='desk01'><div class='desk02'><span><%if(numbers.get(i) == 0) out.println("X"); else out.println(numbers.get(i)); %></span></div></div>
+	    	     <div class='desk01'><div class='desk02'><span><%if(numbers.get(i+1) == 0) out.println("X"); else out.println(numbers.get(i+1)); %></span></div></div>
+	    	     <div class='tmp'></div>
+	    		 <%
+	    	 }
+	    	 else{
 	    	 %>
 	    	 <div class='desk01' <% if(numbers.get(i) == 0) out.println("style='visibility: hidden;'"); %>><div class='desk02'><span><%=numbers.get(i)%>번</span></div></div>
 	    	 <div class='desk01' <% if(numbers.get(i+1) == 0) out.println("style='visibility: hidden;'"); %>><div class='desk02'><span><%=numbers.get(i+1)%>번</span></div></div>
 	    	 <div class='tmp'></div>
 	    	 <% 
+	    	 }
 	    	 if(cnt%division == 0){
 	    		 out.println("<br>");
 	    	 }
 	     }
 	     
-	   
+	 
+	     
+	     
 	   %>
        </div>
 
