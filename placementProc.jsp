@@ -18,7 +18,7 @@
 	}
         .desk01 {
             margin: 10px;
-            border: 1px solid rgba(0, 0, 0, 0.25);
+            border: 2px solid rgba(0, 0, 0, 0.25);
             width: 80px;
             background: #d28b20;
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
@@ -122,15 +122,15 @@
 	    	 cnt++;
 	    	 if(tmpIndex < (division*2)){
 	    		 %>
-	    		 <div class='desk01'><div class='desk02'><span><%if(numbers.get(i) == 0) out.println("X"); else out.println(numbers.get(i)); %></span></div></div>
-	    	     <div class='desk01'><div class='desk02'><span><%if(numbers.get(i+1) == 0) out.println("X"); else out.println(numbers.get(i+1)); %></span></div></div>
+	    		 <div class='desk01' id = "<%=i%>" onclick ="seatClick(<%=i%>)"><div class='desk02'><span id="span<%=i%>"><%if(numbers.get(i) == 0) out.println("X"); else out.println(numbers.get(i)); %></span></div></div>
+	    	     <div class='desk01' id = "<%=i+1%>" onclick ="seatClick(<%=i+1%>)"><div class='desk02'><span id="span<%=i+1%>"><%if(numbers.get(i+1) == 0) out.println("X"); else out.println(numbers.get(i+1)); %></span></div></div>
 	    	     <div class='tmp'></div>
 	    		 <%
 	    	 }
 	    	 else{
 	    	 %>
-	    	 <div class='desk01' <% if(numbers.get(i) == 0) out.println("style='visibility: hidden;'"); %>><div class='desk02'><span><%=numbers.get(i)%>번</span></div></div>
-	    	 <div class='desk01' <% if(numbers.get(i+1) == 0) out.println("style='visibility: hidden;'"); %>><div class='desk02'><span><%=numbers.get(i+1)%>번</span></div></div>
+	    	 <div class='desk01' id = "<%=i%>" onclick ="seatClick(<%=i%>)" <% if(numbers.get(i) == 0) out.println("style='visibility: hidden;'"); %>><div class='desk02'><span id="span<%=i%>"><%=numbers.get(i)%>번</span></div></div>
+	    	 <div class='desk01' id = "<%=i+1%>" onclick ="seatClick(<%=i+1%>)" <% if(numbers.get(i+1) == 0) out.println("style='visibility: hidden;'"); %>><div class='desk02'><span id="span<%=i+1%>"><%=numbers.get(i+1)%>번</span></div></div>
 	    	 <div class='tmp'></div>
 	    	 <% 
 	    	 }
@@ -144,6 +144,32 @@
 	     
 	   %>
        </div>
+       <script>
+       var cnt = 0;
+       var tmpIdx1;
+       var tmpIdx2;
+       
+        function seatClick(idx){
+        	cnt++;
+        	if(cnt%2==1){
+        		tmpIdx1 = idx;
+        	}
+        	else{
+        		tmpIdx2 = idx;
+        	}
+        	 var idx = document.getElementById(idx);
+        	 idx.style.border = '2px solid red';
+        	 if(cnt==2){
+        		 cnt=0;
+        		 var tmpText = document.getElementById("span"+tmpIdx1).innerHTML;
+        		 document.getElementById("span"+tmpIdx1).innerHTML = document.getElementById("span"+tmpIdx2).innerHTML;
+        		 document.getElementById("span"+tmpIdx2).innerHTML = tmpText;
+        		 document.getElementById(tmpIdx1).style.border = '2px solid rgba(0, 0, 0, 0.25)';
+        		 document.getElementById(tmpIdx2).style.border = '2px solid rgba(0, 0, 0, 0.25)';
+        	 }
+         }
+       </script>
+    
 
 </body>
 </html>
