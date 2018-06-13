@@ -51,6 +51,7 @@
             width: 80%;
             margin: 30px auto;
         }
+       
     </style>
 </head>
 <body>
@@ -90,9 +91,11 @@
 			
 		}
 		
-		if(numbers.size()%2 == 1){
+		
+		
+		while(numbers.size() % (division*2) !=0){
 			numbers.add(0);
-		} 
+		}
 		
 	%>
 	
@@ -109,16 +112,18 @@
 	   int cnt = 0;
 	     for(int i = 0; i < numbers.size(); i+=2){
 	    	 cnt++;
+	    	 
 	    	 %>
-	    	 <div class='desk01'><div class='desk02'><span><%=numbers.get(i)%>번</span></div></div>
-	    	 <div class='desk01'><div class='desk02'><span><%=numbers.get(i+1)%>번</span></div></div>
+	    	 <div class='desk01' <% if(numbers.get(i) == 0) out.println("style='visibility: hidden;'"); %>><div class='desk02'><span><%=numbers.get(i)%>번</span></div></div>
+	    	 <div class='desk01' <% if(numbers.get(i+1) == 0) out.println("style='visibility: hidden;'"); %>><div class='desk02'><span><%=numbers.get(i+1)%>번</span></div></div>
 	    	 <div class='tmp'></div>
 	    	 <% 
 	    	 if(cnt%division == 0){
 	    		 out.println("<br>");
 	    	 }
-	    	
 	     }
+	     
+	   
 	   %>
        </div>
 
